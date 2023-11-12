@@ -1,0 +1,9 @@
+# Ignorar módulos instalados
+node_modules
+
+# Ignorar arquivos gerados automaticamente
+logs
+.env
+
+# Se for utilizar o VSCode, pode adicionar:
+.vscode

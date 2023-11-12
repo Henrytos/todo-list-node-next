@@ -1,0 +1,8 @@
+# Ignore arquivos e diretórios padrões do Next.js
+node_modules
+.next
+out
+
+# Cache do npm/yarn
+package-lock.json
+yarn.lock

@@ -53,11 +53,15 @@ router.put("/:id", async (req, res) => {
 
 router.post("/:id", async (req, res) => {
   let { name } = req.body;
-  let task = await Task.create({ name, checklist: req.params.id });
 
   try {
-    await task.save();
     let checklist = await Checklist.findById(req.params.id);
+    let task = await Task.create({
+      checklistName: checklist.name,
+      name,
+      checklist: req.params.id,
+    });
+    await task.save();
     checklist.tasks.push(task);
     checklist.save();
     res.status(200).json(task);

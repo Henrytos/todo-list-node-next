@@ -1,27 +1,24 @@
 "use client";
 
-import useTask, { task } from "@/hooks/useTask";
+import useTask from "@/hooks/useTask";
+import axios from "axios";
 import { Pen, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 export default function page({ params }: { params: { id: string } }) {
-  const {
-    tasks,
-    getTasks,
-    createTask,
-    switchDone,
-    deleteTask,
-    updateNameTask,
-  } = useTask();
+  const { tasks, createTask, switchDone, deleteTask, updateNameTask } =
+    useTask();
   const [nameTask, setNameTask] = useState("");
   const [nameTaskUpdate, setNameTaskUpdate] = useState("");
 
   const tasksFromChecklist = tasks.filter(
     (task) => task.checklist == params.id
   );
-
   return (
     <section className="flex flex-col gap-8">
+      <h2 className="text-2xl">
+        Checklist: {tasksFromChecklist[0]?.checklistName}
+      </h2>
       <form
         className="flex flex-col gap-4"
         onSubmit={(ev) => {
@@ -43,6 +40,10 @@ export default function page({ params }: { params: { id: string } }) {
           onClick={async () =>
             nameTask.length && (await createTask(nameTask, params.id))
           }
+          className="  
+          border-green-800 text-green-800 border-2 p-2
+          hover:bg-green-800 hover:text-white rounded-sm transition-colors cursor-pointer
+          "
         >
           Adicionar
         </button>

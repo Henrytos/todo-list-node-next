@@ -1,12 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { checklist } from "./useChecklist";
 
 export type task = {
   _id: string;
   name: string;
   done: boolean;
   checklist: string;
+  checklistName: string;
 };
 
 const url = "http://localhost:8080/checklist/task";

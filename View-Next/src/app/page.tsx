@@ -1,4 +1,6 @@
 "use client";
+import ChecklistDetails from "@/components/ChecklistDetails";
+import Icon from "@/components/Icon";
 import useChecklist from "@/hooks/useChecklist";
 import { Eye, Pen, Trash2 } from "lucide-react";
 import Link from "next/link";
@@ -45,7 +47,7 @@ export default function Home() {
         <ul className="flex  flex-col gap-4">
           {checklists.map((checklist, i) => (
             <li key={checklist._id} className="flex w-full  justify-between">
-              <span className="text-xl flex items-center gap-2">
+              <div className="text-xl flex items-center gap-2">
                 <span>{i + 1}</span> -
                 <form
                   onSubmit={(e) => {
@@ -71,33 +73,30 @@ export default function Home() {
                     className="text-white bg-black"
                   />
                 </form>
-              </span>
+              </div>
 
               <div className="flex gap-4 ">
-                <span
-                  onClick={() => deleteUser(checklist._id)}
-                  className="p-1 text-red-800  border-red-800 border-2 hover:bg-red-800  hover:text-white rounded-sm transition-colors cursor-pointer"
-                >
+                <Icon onClick={() => deleteUser(checklist._id)} color="red">
                   <Trash2 />
-                </span>
+                </Icon>
 
-                <span
+                <Icon
                   onClick={() => {
                     let input = document.getElementById(checklist._id);
                     input?.removeAttribute("disabled");
                     setNameUpdate(checklist.name);
                     input?.focus();
                   }}
-                  className="p-1 text-sky-800  border-sky-800 border-2 hover:bg-sky-800  hover:text-white rounded-sm transition-colors cursor-pointer"
+                  color="sky"
                 >
                   <Pen />
-                </span>
-                <Link
-                  className="p-1 text-emerald-800  border-emerald-800 border-2 hover:bg-emerald-800  hover:text-white rounded-sm transition-colors cursor-pointer"
-                  href={`/checklist/${checklist._id}`}
-                >
-                  <Eye />
-                </Link>
+                </Icon>
+
+                <Icon color="emerald">
+                  <Link href={`/checklist/${checklist._id}`}>
+                    <Eye />
+                  </Link>
+                </Icon>
               </div>
             </li>
           ))}

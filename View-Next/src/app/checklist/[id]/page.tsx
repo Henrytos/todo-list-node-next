@@ -1,8 +1,8 @@
 "use client";
 
+import FormTask from "@/components/FormTask";
+import TaskDeatils from "@/components/TaskDetails";
 import useTask from "@/hooks/useTask";
-import axios from "axios";
-import { Pen, Trash2 } from "lucide-react";
 import { useState } from "react";
 
 export default function page({ params }: { params: { id: string } }) {
@@ -14,108 +14,30 @@ export default function page({ params }: { params: { id: string } }) {
   const tasksFromChecklist = tasks.filter(
     (task) => task.checklist == params.id
   );
+
   return (
     <section className="flex flex-col gap-8">
-      <h2 className="text-2xl">
-        Checklist: {tasksFromChecklist[0]?.checklistName}
-      </h2>
-      <form
-        className="flex flex-col gap-4"
-        onSubmit={(ev) => {
-          ev.preventDefault();
-          setNameTask("");
-        }}
-      >
-        <label htmlFor="nameTask">Nova task</label>
-        <input
-          type="text"
-          name="nameTask"
-          id="nameTask"
-          value={nameTask}
-          onChange={(ev) => setNameTask(ev.target.value)}
-          className="bg-black text-white border-white border-2 p-1"
-        />
-        <button
-          type="submit"
-          onClick={async () =>
-            nameTask.length && (await createTask(nameTask, params.id))
-          }
-          className="  
-          border-green-800 text-green-800 border-2 p-2
-          hover:bg-green-800 hover:text-white rounded-sm transition-colors cursor-pointer
-          "
-        >
-          Adicionar
-        </button>
-      </form>
+      <h2>Checklist: {tasksFromChecklist[0]?.checklistName}</h2>
+      <FormTask
+        createTask={createTask}
+        nameTask={nameTask}
+        setNameTask={setNameTask}
+        id={params.id}
+        key={params.id}
+      />
 
       <ul className="flex flex-col gap-3">
         {tasksFromChecklist?.map((task, i) => (
-          <div className="flex  justify-between items-center" key={task._id}>
-            <form
-              className="flex gap-4 items-center"
-              onSubmit={(e) => {
-                e.preventDefault();
-                nameTaskUpdate.length > 0 && setNameTaskUpdate("");
-                updateNameTask(task._id, nameTaskUpdate);
-                setNameTaskUpdate("");
-                let input = document.getElementById(task._id);
-                input?.blur();
-                input.disabled = "true";
-              }}
-            >
-              <input
-                type="checkbox"
-                name={i.toString()}
-                checked={task.done}
-                id={i.toString()}
-                onClick={() => {
-                  switchDone(task._id);
-                }}
-              />
-
-              <label
-                htmlFor={i.toString()}
-                onClick={() => {
-                  document.getElementById(i)?.focus();
-                }}
-              >
-                <input
-                  type="text"
-                  disabled={true}
-                  id={task._id}
-                  value={
-                    nameTaskUpdate.length > 0 &&
-                    document.getElementById(task._id)?.disabled === false
-                      ? nameTaskUpdate
-                      : task.name
-                  }
-                  onChange={(e) => setNameTaskUpdate(e.target.value)}
-                  className="text-white bg-black text-xl"
-                />
-              </label>
-            </form>
-
-            <div className="flex gap-4 ">
-              <span
-                onClick={() => deleteTask(task._id)}
-                className="p-1 text-red-800  border-red-800 border-2 hover:bg-red-800  hover:text-white rounded-sm transition-colors cursor-pointer"
-              >
-                <Trash2 />
-              </span>
-              <span
-                onClick={() => {
-                  let input = document.getElementById(task._id);
-                  input?.removeAttribute("disabled");
-                  setNameTaskUpdate(task.name);
-                  input?.focus();
-                }}
-                className="p-1 text-sky-800  border-sky-800 border-2 hover:bg-sky-800  hover:text-white rounded-sm transition-colors cursor-pointer"
-              >
-                <Pen />
-              </span>
-            </div>
-          </div>
+          <TaskDeatils
+            i={i}
+            nameTaskUpdate={nameTaskUpdate}
+            setNameTaskUpdate={setNameTaskUpdate}
+            task={task}
+            key={i}
+            deleteTask={deleteTask}
+            switchDone={switchDone}
+            updateNameTask={updateNameTask}
+          />
         ))}
       </ul>
     </section>

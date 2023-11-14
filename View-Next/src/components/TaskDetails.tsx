@@ -1,24 +1,21 @@
 import { task } from "@/hooks/useTask";
 import { Pen, Trash2 } from "lucide-react";
 import Icon from "./Icon";
+import { useContext } from "react";
+import { TaskContext } from "@/contexts/TaskContext";
 
 export default function TaskDeatils({
   task,
   i,
   nameTaskUpdate,
   setNameTaskUpdate,
-  switchDone,
-  deleteTask,
-  updateNameTask,
 }: {
   i: number;
   task: task;
   nameTaskUpdate: string;
   setNameTaskUpdate: React.Dispatch<React.SetStateAction<string>>;
-  switchDone: (id: string) => Promise<void>;
-  deleteTask: (id: string) => Promise<void>;
-  updateNameTask: (id: string, newName: string) => Promise<void>;
 }) {
+  const { deleteTask, switchDone, updateNameTask } = useContext(TaskContext);
   return (
     <div className="flex  justify-between items-center" key={task._id}>
       <form

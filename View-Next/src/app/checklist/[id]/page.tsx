@@ -2,12 +2,11 @@
 
 import FormTask from "@/components/FormTask";
 import TaskDeatils from "@/components/TaskDetails";
-import useTask from "@/hooks/useTask";
-import { useState } from "react";
+import { TaskContext } from "@/contexts/TaskContext";
+import { useContext, useState } from "react";
 
 export default function page({ params }: { params: { id: string } }) {
-  const { tasks, createTask, switchDone, deleteTask, updateNameTask } =
-    useTask();
+  const { tasks, createTask } = useContext(TaskContext);
   const [nameTask, setNameTask] = useState("");
   const [nameTaskUpdate, setNameTaskUpdate] = useState("");
 
@@ -34,9 +33,6 @@ export default function page({ params }: { params: { id: string } }) {
             setNameTaskUpdate={setNameTaskUpdate}
             task={task}
             key={i}
-            deleteTask={deleteTask}
-            switchDone={switchDone}
-            updateNameTask={updateNameTask}
           />
         ))}
       </ul>

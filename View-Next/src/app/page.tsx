@@ -1,15 +1,15 @@
 "use client";
-import ChecklistDetails from "@/components/ChecklistDetails";
 import Icon from "@/components/Icon";
-import useChecklist from "@/hooks/useChecklist";
+import { ChecklistContext } from "@/contexts/ChecklistContext";
+
 import { Eye, Pen, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { MagicMotion } from "react-magic-motion";
 
 export default function Home() {
   const { checklists, createUser, deleteUser, updateChecklist } =
-    useChecklist();
+    useContext(ChecklistContext);
   const [name, setName] = useState("");
   const [nameUpdate, setNameUpdate] = useState("");
 

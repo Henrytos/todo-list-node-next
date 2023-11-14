@@ -1,14 +1,16 @@
+import { TaskContext } from "@/contexts/TaskContext";
+import { useContext } from "react";
+
 export default function FormTask({
   nameTask,
   setNameTask,
-  createTask,
   id,
 }: {
   nameTask: string;
   setNameTask: React.Dispatch<React.SetStateAction<string>>;
-  createTask: (name: string, checklist: string) => Promise<void>;
   id: string;
 }) {
+  const { createTask } = useContext(TaskContext);
   return (
     <form
       className="flex flex-col gap-4"

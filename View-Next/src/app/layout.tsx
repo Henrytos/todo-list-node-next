@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ChecklistProvider } from "@/contexts/ChecklistContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <main className="flex min-h-screen flex-col max-w-2xl gap-8 m-auto p-24">
           <h1 className="text-4xl font-bold">Todo-List</h1>
-          {children}
+          <ChecklistProvider>{children}</ChecklistProvider>
         </main>
       </body>
     </html>

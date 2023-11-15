@@ -44,7 +44,7 @@ export default function Home() {
         </button>
       </form>
       <MagicMotion>
-        <ul className="flex  flex-col gap-4">
+        <ul className="flex  flex-col gap-4 ">
           {checklists.map((checklist, i) => (
             <li key={checklist._id} className="flex w-full  justify-between">
               <div className="text-xl flex items-center gap-2">

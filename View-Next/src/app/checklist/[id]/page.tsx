@@ -18,15 +18,13 @@ export default function page({ params }: { params: { id: string } }) {
     <section className="flex flex-col gap-8">
       <h2>Checklist: {tasksFromChecklist[0]?.checklistName}</h2>
       <FormTask
-        createTask={createTask}
         nameTask={nameTask}
         setNameTask={setNameTask}
         id={params.id}
         key={params.id}
       />
-
-      <ul className="flex flex-col gap-3">
-        {tasksFromChecklist?.map((task, i) => (
+      <ul className="flex flex-col gap-3 transition-transform">
+        {tasksFromChecklist.map((task, i) => (
           <TaskDeatils
             i={i}
             nameTaskUpdate={nameTaskUpdate}

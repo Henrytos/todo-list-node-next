@@ -19,7 +19,9 @@ export default function FormTask({
         setNameTask("");
       }}
     >
-      <label htmlFor="nameTask">Nova task</label>
+      <label htmlFor="nameTask" className="text-2xl">
+        Nova task
+      </label>
       <input
         type="text"
         name="nameTask"

@@ -9,7 +9,7 @@ export type task = {
   checklistName: string;
 };
 
-const url = "http://localhost:8080/checklist/task";
+const url = "http://localhost:8000/checklist/task";
 
 function useTask() {
   const [tasks, setTasks] = useState<task[]>([] as task[]);

@@ -16,7 +16,9 @@ export default function page({ params }: { params: { id: string } }) {
 
   return (
     <section className="flex flex-col gap-8">
-      <h2>Checklist: {tasksFromChecklist[0]?.checklistName}</h2>
+      <h2 className="text-2xl">
+        Checklist: {tasksFromChecklist[0]?.checklistName}
+      </h2>
       <FormTask
         nameTask={nameTask}
         setNameTask={setNameTask}

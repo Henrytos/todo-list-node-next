@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const port = 8080;
+const port = 8000;
 
 const checklistRouter = require("./src/routes/checklist");
 const taskRouter = require("./src/routes/task");
